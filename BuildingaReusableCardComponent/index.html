@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        #root{
+            margin-top: 20vh;
+            height: 40vh;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+        #root div{
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function Welcome(props){
+            return(
+                <div>
+                    <h4>Welcome User</h4>
+                    <p>Username : {props.children}</p>    
+                </div>
+            )
+        }
+        function App(){
+            return(
+                <>
+                <Welcome>John Doe</Welcome>
+                <Welcome>Alice Kinley</Welcome>
+                <Welcome>Snoop Dog</Welcome>
+                </>
+            )
+        }
+        let root=ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<App/>)
+    </script>
+</body>
+</html>
