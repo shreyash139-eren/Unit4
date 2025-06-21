@@ -1,0 +1,45 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+nav {
+  width: 60%;
+  height: 6vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+nav button {
+  padding: 8px;
+  border-radius: 10px;
+  border: 0;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+nav button:hover {
+  color: rgb(0, 255, 0);
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30vh;
+}
+
+@media (width < 500px) {
+  nav {
+    width: 80%;
+  }
+  nav button {
+    font-size: 15px;
+  }
+}
