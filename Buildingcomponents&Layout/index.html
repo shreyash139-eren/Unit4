@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        #container{
+            width: 80%;
+            margin: auto;
+        }
+        #heading{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            margin: 20px;
+        }
+        #purp{
+            color: rgb(169, 107, 224);
+        }
+        #heading p{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #heading h1{
+            text-align: center;
+        }
+        .cards{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+        }
+        .cards div{
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+        .cards p{
+            margin-bottom: 15px;
+        }
+        .cards button{
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 0;
+            color: rgb(169, 107, 224);
+            background-color: rgb(206, 213, 227);
+            cursor: pointer;
+        }
+        .cards button:hover{
+            color: white;
+            background-color: rgb(169, 107, 224);
+        }
+    </style>
+</head>
+<body>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="root">From DOM</div>
+
+    <script type="text/babel">
+
+        function Heading(props){
+            return (
+               <div id="heading">
+                <div>
+                <h1>{props.head}</h1>
+                <h1 id="purp">{props.head2}</h1>
+                </div>
+                <p>{props.body}</p>
+                </div>
+            )
+        }
+
+        function Card(props){
+            return(
+                <div class="cards">
+
+                    <div>
+                        <h2>{props.title}</h2>
+                    </div>
+                    <div>
+                        <p>{props.para1}</p>
+                        <p>{props.para2}</p>
+                        <p>{props.para3}</p>
+                    </div>
+                    <div>
+                        <h1>{props.price}</h1>
+                    </div>
+                    <div>
+                    <button>Get Started</button>
+                    </div>
+                    
+                </div>
+            )
+        }
+    
+        function App(){
+            return(
+                <>
+                <div id="container">
+                <Heading head="The Right Plan For" head2="Your Business" body=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, dolorum. Optio hic unde beatae? Amet voluptatem ullam vero doloribus suscipit!"/>
+                <Card title="starter" para1="✅ 1 lorem ipsum" para2="✅ Lorem,ipsum color." para3="✅ Monthly Updates" price="Free" />
+                <Card title="Lorem Plus" para1="✅ 1 lorem ipsum" para2="✅ Lorem,ipsum color." para3="✅ Monthly Updates" price="＄32.00" />
+                <Card title="Lorem Pro" para1="✅ 1 lorem ipsum" para2="✅ Lorem,ipsum color." para3="✅ Monthly Updates" price="＄50.00" />
+                </div>
+                </>
+            )
+        }
+
+
+        let root=ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<App/>)
+
+
+    </script>
+</body>
+</html>

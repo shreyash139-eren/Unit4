@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        #container{
+            width: 80%;
+            height: 60vh;
+            margin: auto;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        #container h1{
+            text-align: center;
+            font-size: 36px;
+        }
+        #container h3{
+            cursor: pointer;
+            text-align: center;
+            font-size: 30px;
+        }
+        #container h3:hover{
+            color: rgb(0, 253, 0);
+        }
+        #content,#msg{
+            font-size: 24px;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="root">From DOM</div>
+
+    <script type="text/babel">
+        const {useState}=React
+
+        
+        function App(){
+            const [index, setIndex]=useState(null)
+            const blogs = [
+                { title: "Mastering JavaScript", content: "JavaScript is a powerful language for web development." },
+                { title: "React in Indian Startups", content: "React is widely used in many Indian tech companies." },
+                { title: "Career in Web Development", content: "Explore job roles and growth in web development." },
+                ];
+
+            return(
+                <div id="container">
+                    <h1><u>Blogs</u></h1>
+                { blogs.map((blog,i)=>(
+                    <div key ={i}>
+                        <h3 onClick={()=>{return(
+                        document.getElementById("msg").style.display="none",
+                        setIndex(i)
+                        
+                        )}}>{blog.title}</h3>
+                    </div>
+            
+            ))}
+                    <div id="msg">Select a blog to read</div>
+            {(index!==null)&&(
+                <div id="content">
+                    <p>{blogs[index].content}</p>
+                </div>
+            )
+            }
+                </div>
+            )
+        }
+        let root=ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<App/>)
+    </script>
+</body>
+</html>
