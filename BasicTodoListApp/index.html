@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="root">Hello From Dom</div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const {useState}=React
+
+        function App(){
+            const [tasks,setTasks]=useState(["Buy milk", "Study React"])
+            const [form, setForm]=useState({task:""})
+
+            function handleSubmit(e){
+                e.preventDefault()
+                if(form.task.trim()===""){
+                    return alert("Please enter Task!")
+                }
+                setTasks([...tasks, form.task])
+                setForm({task:""})
+            }
+
+            function handleChange(e){
+                const {name,value}=e.target
+                setForm({...form, [name]:value})
+            }
+
+            function Clear(){
+                setTasks([])
+            }
+
+            return(
+                <>
+                <div id="nav">
+                    <div>
+                        <form onSubmit={handleSubmit}>
+                             <label>Task : <input type="text" name="task" value={form.task} onChange={handleChange}/>
+                            <button>Add</button>
+                            </label>    
+                        </form>    
+                    </div>
+                    <div>
+                        <button onClick={Clear}>Clear All</button>    
+                    </div>
+
+                </div>
+
+                <div id="container">
+                    <h2><u>Tasks</u></h2>
+                    {tasks.length>0?
+                        tasks.map((ele,i)=>(
+                    <h3 key={i}>▸ {ele}</h3>
+                    )):
+                    <h3>No tasks available.</h3>
+                }
+                </div>
+                </>
+            )
+        }
+
+        let root=ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<App/>)
+    </script>
+</body>
+</html>

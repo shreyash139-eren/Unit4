@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="root">Hello From Dom</div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const {useState}=React
+
+        function App(){
+            const [student, setStudent]=useState([{id:1,name:"Rahul Kumar",present:true},{id:2,name:"Ankit Kumar",present:true},{id:3,name:"Abhishek Kumar",present:false},{id:4,name:"Raman Kumar",present:true},{id:5,name:"saurav Kumar",present:false}])
+
+            const [filter,setFilter]=useState("")
+
+            const count=student.filter((ele)=>ele.present).length
+            function handleClick(id){
+              const update=student.map((ele)=>ele.id===id ? {...ele, present:!ele.present}:ele)
+              setStudent(update)
+            }
+
+            function handleChange(e){
+                setFilter(e.target.value)
+            }
+
+            const filtered=student.filter((ele)=>{
+                if(filter===""){
+                    return true
+                }
+                return String(ele.present)===filter
+            })
+
+            return(
+                <>
+                <div id="nav">
+                <label>Filter : <select onChange={handleChange}>
+                        <option value="">All</option>
+                        <option value="true">Present</option>    
+                        <option value="false">Absent</option>    
+                    </select>
+                </label>
+                <h3>Present : {count}</h3>
+                </div>
+
+                <div id="container">
+                 {   
+                    filtered.map((ele,i)=>(
+                    <div key={i}>
+                        <h3>Name : {ele.name}</h3> 
+                        <h3>Id : {ele.id}</h3>
+                        {ele.present ? (<h4 style={{backgroundColor:"green"}}>Present</h4>) : (<h4 style={{backgroundColor:"red"}}>Present</h4>)}
+                        <button onClick={()=>handleClick(ele.id)}>Toggle</button>
+                    </div>
+                    ))
+                }
+                </div>
+                </>
+            )
+        }
+
+        let root=ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<App/>)
+    </script>
+</body>
+</html>
