@@ -1,0 +1,21 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6vh;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+#nav button{
+    padding: 5px 10px;
+    cursor: pointer;
+}
+#nav button:hover{
+    color: white;
+    background-color: maroon;
+}
+#

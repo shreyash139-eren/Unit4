@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">Hello From Dom</div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+
+    <script type="text/babel">
+        const {useState}=React
+
+        function App(){
+            const [memes,setMemes]=useState([])
+            const [final, setFinal]=useState([])
+            const [form,setForm]=useState({search:"",sort:"",filter:"",theme:""})
+
+            async function fetchMeme(){
+                try {
+                    let response=await axios.get("https://api.imgflip.com/get_memes")
+                    setMemes(response.data.data.memes)
+                } catch (error) {
+                    console.log(error.message)
+                }
+            }
+
+            function handleChange(e){
+                console.log(e.target.value)
+            }
+
+            return(
+                <>
+                    <div id="nav">
+                    <form>
+                    <input type="text" name="search" value={form.search} onChange={handleChange}/>
+                    <button>Search</button>
+                
+                    <label>Sort : <select name="sort" value={form.sort} onChange={handleChange}>
+                        <option value=""></option>
+                        <option value="name">Name</option>
+                        <option value="width">Width</option>
+                        </select></label>    
+
+                    <label>Filter : <select name="filter" value={form.filter} onChange={handleChange}>
+                        <option value="big">Width 500+</option>
+                        <option value="small">Width 500-</option>
+                    </select></label>    
+                
+                    <label>Theme : <select name="theme" value={form.theme} onChange={handleChange}>
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select></label>
+                    </form>
+                    </div>
+                            <button onClick={fetchMeme}>Load Memes</button>
+                
+                </>
+            )
+        }
+
+        let root=ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<App/>)
+    </script>
+</body>
+</html>
