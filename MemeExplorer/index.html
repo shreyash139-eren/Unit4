@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="root">Hello From Dom</div>
@@ -18,9 +19,15 @@
 
         function App(){
             const [memes,setMemes]=useState([])
-            const [final, setFinal]=useState([])
             const [form,setForm]=useState({search:"",sort:"",filter:"",theme:""})
 
+            {document.body.style.backgroundColor=form.theme
+                if(form.theme==="rgb(3, 51, 79)"){
+                    document.body.style.color="white"
+                }else{
+                    document.body.style.color="black"
+                }
+            }
             async function fetchMeme(){
                 try {
                     let response=await axios.get("https://api.imgflip.com/get_memes")
@@ -31,34 +38,75 @@
             }
 
             function handleChange(e){
-                console.log(e.target.value)
+                const {name,value}=e.target
+                setForm({...form, [name]:value})
+                if(finalMemes.length===0){
+                    document.getElementById("message").style.display="block"
+                }
             }
+        
 
+            const finalMemes = memes
+                .filter((ele) =>
+                ele.name.toLowerCase().includes(form.search.toLowerCase().trim())
+                )
+                .filter((ele) => {
+                if (form.filter==="big")return ele.width >= 500;
+                if (form.filter==="small") return ele.width < 500;
+                return true;
+                })
+                .sort((a, b) => {
+                if (form.sort === "name") return a.name.localeCompare(b.name);
+                if (form.sort === "width") return b.width - a.width;
+                return 0;
+                });
+               
             return(
                 <>
                     <div id="nav">
-                    <form>
-                    <input type="text" name="search" value={form.search} onChange={handleChange}/>
-                    <button>Search</button>
-                
-                    <label>Sort : <select name="sort" value={form.sort} onChange={handleChange}>
-                        <option value=""></option>
-                        <option value="name">Name</option>
-                        <option value="width">Width</option>
-                        </select></label>    
-
-                    <label>Filter : <select name="filter" value={form.filter} onChange={handleChange}>
-                        <option value="big">Width 500+</option>
-                        <option value="small">Width 500-</option>
-                    </select></label>    
-                
-                    <label>Theme : <select name="theme" value={form.theme} onChange={handleChange}>
-                            <option value="light">Light</option>
-                            <option value="dark">Dark</option>
-                        </select></label>
-                    </form>
+                        <div>
+                        <input type="text" name="search" value={form.search} onChange={handleChange}/>
+                        </div>
+                        <div>
+                            <label>Sort : <select name="sort" value={form.sort} onChange={handleChange}>
+                            <option value="">Select</option>
+                            <option value="name">Name</option>
+                            <option value="width">Width</option>
+                            </select></label>  
+                        </div>
+                        
+                        <div>
+                            <label>Filter : <select name="filter" value={form.filter} onChange={handleChange}>
+                            <option value="">Select</option>
+                            <option value="big">Width 500+</option>
+                            <option value="small">Width 500-</option>
+                        </select></label> 
+                        </div>
+                        
+                        <div>
+                            <label>Theme : <select name="theme" value={form.theme} onChange={handleChange}>
+                            <option value="">Select</option>
+                            <option value="beige">Light</option>
+                                <option value="rgb(3, 51, 79)">Dark</option>
+                            </select></label>
+                        </div>
                     </div>
-                            <button onClick={fetchMeme}>Load Memes</button>
+
+                    <div id="button">
+                        <button onClick={fetchMeme}>Load Memes</button>
+                    </div>
+
+
+                    <div id="container">
+                      { finalMemes.length>0 ? (finalMemes.map((ele,i)=>(
+                            <div key={i}>
+                                <img src={ele.url} alt="Image"/>
+                                <p>Name : {ele.name}</p>
+                                <p>Width : {ele.width}</p>
+                            </div>
+                        ))):(<h1 id="message" style={{display:"none"}}>No Memes Found!</h1>)
+                    }
+                    </div>
                 
                 </>
             )

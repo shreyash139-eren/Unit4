@@ -35,16 +35,17 @@
                 <>
                 <div id="nav">
                 <button onClick={fetchData}>Fetch Data</button>
-                    
-                    </div>
+                 </div>
                 <div id="container">
-                {data.map((ele,i)=>(
+                {data.length>0 ? (data.map((ele,i)=>(
                     <div>
                     <img src={ele.image} alt=""/>
-                    <h1>{ele.title}</h1>
-                    <p>{ele.price}</p>
+                    <h4>{ele.title}</h4>
+                    <p>Price : {ele.price}</p>
                     </div>
-                ))}
+                ))
+                ):(<h1>No Products Available</h1>)
+            }
             </div>
                 </>
             )
