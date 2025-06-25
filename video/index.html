@@ -6,43 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
-
-    <div id="root"></div>
-
     <script type="text/babel">
         const {useState}=React
 
         function App(){
-            const [data,setData]=useState([])
-            
-            async function fetchData(){
-                try {
-                    const response=await axios.get("https://fakestoreapi.com/products")
-                    console.log(response.data)
-                    setData(response.data)
-                } catch (error) {
-                    
-                }
-               
-            }
-
-            return(
-                    <>
-                    <button onClick={fetchData}>Fetch</button>
-                    {data.map((ele,i)=>(
-                        <div key={i}>
-                            <h1>{ele.title}</h1>   
-                            <img src={ele.image} alt=""/> 
-                            <p>{ele.price}</p>
-                        </div>
-                    ))}
-                    </>
-                )
+          
         }
 
         let root=ReactDOM.createRoot(document.getElementById("root"))
