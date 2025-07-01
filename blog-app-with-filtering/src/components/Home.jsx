@@ -47,16 +47,16 @@ function Home(){
 
     return(
         <>
-        <input type="text" onChange={(e)=>{setChange(e.target.value)}} />
+        <input type="text" placeholder="Search" onChange={(e)=>{setChange(e.target.value)}} style={{width:"300px",padding:"5px",borderRadius:"10px"}}/>
         
         {filtered.length===0?(
                 <h1>No Blog Found!</h1>):
                 (<div id="container">
                     {filtered.map((ele)=>(
-                        <div key={ele.id}>
+                        <div key={ele.id} style={{border:"1px solid", marginBottom:"10px", marginTop:"10px"}}>
                             <h2>Title : {ele.title}</h2>
                             <p>{ele.body}</p>
-                            <Link to={`/details/${ele.id}`}>See Details</Link>
+                            <Link to={`/posts/${ele.id}`}>See Details</Link>
                         </div>
                     ))}
                 </div>
