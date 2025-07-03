@@ -5,9 +5,9 @@ function Navbar(){
 
 return(
     <>
-    <Link to="/">Home</Link>
-    <Link to="/tasks">Tasks</Link>
-    <Link to="/about">About</Link>
+    <Link  style={{marginRight:"10px"}} to="/">Home</Link>
+    <Link style={{marginRight:"10px"}} to="/tasks">Tasks</Link>
+    <Link style={{marginRight:"10px"}} to="/about">About</Link>
     </>
 )
 }

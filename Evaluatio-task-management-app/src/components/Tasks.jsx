@@ -25,8 +25,8 @@ function Tasks(){
 return(
     <>
     <div>
-    <input type="text" name="title" value={form.title} onChange={handleChange}/>
-    <input type="text" name="task"  value={form.task} onChange={handleChange}/>
+    <input type="text" name="title" style={{marginRight:"10px"}} value={form.title} onChange={handleChange} placeholder="Enter Title"/>
+    <input type="text" name="task"  style={{marginRight:"10px"}} value={form.task} onChange={handleChange} placeholder="Enter Task"/>
     <button onClick={handleSubmit}>Submit</button>
     </div>
     <div id="container">
