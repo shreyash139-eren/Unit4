@@ -19,6 +19,7 @@ function LogIn(){
         }
         setFormError("")
         dispatch(loginUser({email,password}))
+        console.log(user)
     }
 
     return (
